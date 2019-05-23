@@ -1,0 +1,49 @@
+<!-- https://cs260projkh.firebaseapp.com -->
+<!DOCTYPE html>
+<html>
+  <head>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GoodRead</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+     
+          <div id = "root">
+              <h1>Search for a book below</h1>
+              <div v-if="loading">
+                  <p>loading...</p>
+              </div>
+      
+              <div v-else>
+              
+            <form v-on:submit.prevent="bookFind">
+                <input type="text" v-model="inquiry">
+                <button type="bookFind">
+                    Search
+                </button>
+      
+            </form>
+            <ul>
+                <div v-for="item in myBooks">
+                    <li>{{item.title}} , a book written by {{item.author}}. Published in {{item.publishDate}} 
+                        <form v-on:submit.prevent="FaveItem(item.index)">
+                          <button v-on:click="FaveItem(myBooks[item.index])" >Add to favorites</button>
+                      </form>
+                    </li>
+                  </div>
+             </ul>
+          </div>
+          
+          </div>
+          <h1>Your favorites:</h1>
+          <div v-for="item in favs">
+              <li>{{item.title}} , a book written by {{item.author}}. Published in {{item.publishDate}}  </li>
+            </div>
+          
+        </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.2/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
