@@ -25,21 +25,27 @@
             </form>
             <ul>
                 <div v-for="item in myBooks">
-                    <li>{{item.title}} , a book written by {{item.author}}. Published in {{item.publishDate}} 
-                        <form v-on:submit.prevent="FaveItem(item.index)">
-                          <button v-on:click="FaveItem(myBooks[item.index])" >Add to favorites</button>
+                    <li> <img v-bind:src="item.thumbnail"/>{{item.title}} , a book written by {{item.author}}. Published in {{item.publishDate}} 
+                        <form v-on:submit.prevent="FaveItem(item)">
+                          <button v-on:click="FaveItem(item)" >Add to favorites</button>
                       </form>
                     </li>
                   </div>
+
              </ul>
-          </div>
           
-          </div>
+          
+          
           <h1>Your favorites:</h1>
-          <div v-for="item in favs">
-              <li>{{item.title}} , a book written by {{item.author}}. Published in {{item.publishDate}}  </li>
+          <div v-for="item in myBooks">
+          <div v-if = "item.isFave == true">
+              <li><img v-bind:src="item.thumbnail"/>{{item.title}} , a book written by {{item.author}}. Published in {{item.publishDate}}
+                <form v-on:submit.prevent="deleteItem(item)">
+                  <button v-on:click="deleteItem(item)" >X</button>
+              </form>  </li>
             </div>
-          
+          </div>
+        </div>
         </div>
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.2/dist/vue.js"></script>
